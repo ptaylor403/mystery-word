@@ -43,6 +43,7 @@ def normal_word(words, right, wrong):
         normal_word(words, right, wrong)
 
 def hard_word(words, right, wrong):
+    word = random.choice(words).upper()
     if len(word) >= 8:
         print("\nHard?! You must be a genious! Here's the word.\n")
         print("_ "*len(word))
