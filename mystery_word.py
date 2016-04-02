@@ -9,7 +9,6 @@ def clear():
         os.system('clear')
 
 def difficulty(level, words, right, wrong):
-    clear()
     if level == 'E':
         easy_word(words, right, wrong)
     elif level == 'N':
@@ -85,8 +84,9 @@ def is_letter(guess, word, right, wrong):
         if bool(re.match('[a-zA-Z]+$', guess)):
             return True
         else:
-            print("\nYou can only guess letters in the aplphabet. Try again.")
-            user_input(word, right, wrong)
+            clear()
+            print("\nYou can only guess letters in the aplphabet. Try again.\n")
+            word_visual(word, guess, right, wrong)
     except ValueError:
         return True
 
@@ -98,12 +98,13 @@ def letter_in_word(guess, word, right, wrong):
             right.append(guess)
         else:
             clear()
-            print("Nope. {} is not in my word\n".format(guess))
+            print("\nNope. {} is not in my word\n".format(guess))
             wrong.append(guess)
         word_visual(word, guess, right, wrong)
 
     elif guess in right or guess in wrong:
-        print("\n\nYou already guessed that letter. Try again.\n")
+        clear()
+        print("\nYou already guessed that letter. Try again.\n")
         word_visual(word, guess, right, wrong)
     return guess
 
@@ -121,6 +122,7 @@ def main():
     wrong = []
     clear()
     level = input("\nLet's play a game.\nChoose a difficulty level [E]asy, [N]ormal, [H]ard or [Q]uit to quit: ").upper()
+    clear()
     difficulty(level, words, right, wrong)
 
 if __name__ == '__main__':
