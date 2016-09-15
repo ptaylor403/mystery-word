@@ -4,7 +4,7 @@ from mystery_word import *
 # what can I test in my mystery word game?
 
 word = ["bird", "calf", "river", "stream", "kneecap",  "cookbook",
-             "language", "sneaker", "algorithm", "integration", "brain"]
+        "language", "sneaker", "algorithm", "integration", "brain"]
 right = []
 wrong = []
 

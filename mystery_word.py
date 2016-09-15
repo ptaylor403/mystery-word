@@ -2,11 +2,13 @@ import random
 import re
 import os
 
+
 def clear():
     if os.name == 'nt':
         os.system('cls')
     else:
         os.system('clear')
+
 
 def difficulty(level, words, right, wrong):
     if level == 'E':
@@ -22,6 +24,7 @@ def difficulty(level, words, right, wrong):
         print("That wasn't one of your choices. Try again.")
         main()
 
+
 def easy_word(words, right, wrong):
     word = random.choice(words).upper()
     if len(word) >= 4 and len(word) <= 6:
@@ -32,15 +35,17 @@ def easy_word(words, right, wrong):
     else:
         easy_word(words, right, wrong)
 
+
 def normal_word(words, right, wrong):
     word = random.choice(words).upper()
-    if len(word) >=6 and len(word) <= 8:
+    if len(word) >= 6 and len(word) <= 8:
         print("\nNormal. You think you're pretty smart huh? Here's the word.\n")
         print("_ "*len(word))
         print("\nCan you guess the word I'm thinking of in 8 guesses?\n")
         user_input(word, right, wrong)
     else:
         normal_word(words, right, wrong)
+
 
 def hard_word(words, right, wrong):
     word = random.choice(words).upper()
@@ -51,6 +56,7 @@ def hard_word(words, right, wrong):
         user_input(word, right, wrong)
     else:
         hard_word(words, right, wrong)
+
 
 def user_input(word, right, wrong):
     if len(wrong) < 8:
@@ -70,15 +76,17 @@ def user_input(word, right, wrong):
         return False
     return guess
 
+
 def word_visual(word, guess, right, wrong):
     display = ("_"*len(word))
     print()
     for i in range(len(word)):
         if word[i] in right:
-            display = display[:i] + word[i] + display [i+1:]
+            display = display[:i] + word[i] + display[i+1:]
     for guess in display:
         print(guess, end=' ')
     is_word_complete(display, right, wrong, word)
+
 
 def is_letter(guess, word, right, wrong):
     try:
@@ -90,6 +98,7 @@ def is_letter(guess, word, right, wrong):
             word_visual(word, guess, right, wrong)
     except ValueError:
         return True
+
 
 def letter_in_word(guess, word, right, wrong):
     if guess not in right and guess not in wrong:
@@ -109,13 +118,16 @@ def letter_in_word(guess, word, right, wrong):
         word_visual(word, guess, right, wrong)
     return guess
 
+
 def is_word_complete(display, right, wrong, word):
     if "_" not in display:
         print("\nYou won! Way to go!")
         return False
     else:
         print("\n\nYou have {} guesses left.\n".format(8 - len(wrong)))
+        print("Wrong letters: {}".format(wrong))
         user_input(word, right, wrong)
+
 
 def main():
     words = [line.strip() for line in open('/usr/share/dict/words')]
